@@ -9,6 +9,7 @@ import { getApiConfiguration } from "./store/homeSlice";
 // import all pages & components
 
 import Home from './pages/home/Home'
+import SearchResult from "./pages/SearchResult/SearchResult";
 
 
 function App() {
@@ -18,13 +19,20 @@ function App() {
     
 
   useEffect(() => {
-    apiTesting();
+    fetchApiConfig();
   }, []);
 
-  const apiTesting = () => {
-    fetchDataFromApi("/movie/now_playing").then((res) => {
+  const fetchApiConfig = () => {
+    fetchDataFromApi("/configuration").then((res) => {
       console.log(res);
-      dispatch(getApiConfiguration(res));
+
+      const url = {
+        backdrop:res.images.secure_base_url +"original",
+        poster:res.images.secure_base_url +"original",
+        profile:res.images.secure_base_url +"original"
+      };
+
+      dispatch(getApiConfiguration(url));
     });
   };
 
@@ -32,6 +40,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path='/search/:query' element={<SearchResult/>}/>
       </Routes>
     </BrowserRouter>
   );
