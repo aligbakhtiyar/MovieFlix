@@ -1,17 +1,26 @@
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.scss";
 
+import useFetch from "../../../hooks/useFetch";
+
 const HeroBanner = () => {
-  const [background, setBackground] =useState("");
-  const {query, setQuery} = useState("");
+  const [background, setBackground] = useState("");
+  const { query, setQuery } = useState("");
   const navigate = useNavigate();
 
+  const { data, loading } = useFetch("/movie/upcoming");
+
+  useEffect(() => {
+    const bg = data?.results?.[Math.floor(Math.random() * 20)]?.background_path;
+    setBackground(bg);
+  }, [data]);
+
   const searchQueryHandler = (event) => {
-    if(event.key === "Enter" && query.length > 0) {
-        navigate(`/search/${query}`);
+    if (event.key === "Enter" && query.length > 0) {
+      navigate(`/search/${query}`);
     }
-  }
+  };
 
   return (
     <div className="heroBanner">
@@ -27,11 +36,11 @@ const HeroBanner = () => {
           <div className="searchInput">
             <input
               type="text"
-              placeholder="Serach for movie"
+              placeholder="Serach for movie or tv show..."
               onChange={(e) => setQuery(e.target.value)}
               onKeyUp={searchQueryHandler}
-              />
-              <button>Search</button>
+            />
+            <button>Search</button>
           </div>
         </div>
       </div>
