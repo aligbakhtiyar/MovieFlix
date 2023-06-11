@@ -5,6 +5,9 @@ import "./style.scss";
 
 import useFetch from "../../../hooks/useFetch";
 
+import Img from "../../../components/lazyLoadImage/Img";
+import ContentWrapper from "../../../components/contentWrapper/contentWrapper";
+
 const HeroBanner = () => {
   const [background, setBackground] = useState("");
   const { query, setQuery } = useState("");
@@ -27,14 +30,19 @@ const HeroBanner = () => {
 
   return (
     <div className="heroBanner">
+      {!loading  &&<div className="backdrop-img">
+        <Img src={background} />
+      </div>}
+
+      <div className="opacity-layer">
+
+      </div>
+
+      <ContentWrapper>
       <div className="wrapper">
         <div className="heroBannerContent">
           <span className="title"></span>
           <span className="subtitle">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime
-            illo, quibusdam praesentium numquam voluptatem incidunt dolores
-            aliquid porro quam repellat blanditiis aliquam nemo officia a
-            doloremque. Ipsa nesciunt facilis iure.
           </span>
           <div className="searchInput">
             <input
@@ -47,6 +55,9 @@ const HeroBanner = () => {
           </div>
         </div>
       </div>
+      </ContentWrapper>
+
+      
     </div>
   );
 };
