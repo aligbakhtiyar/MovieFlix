@@ -9,6 +9,7 @@ import { getApiConfiguration } from "./store/homeSlice";
 
 import Home from "./pages/home/Home";
 import SearchResult from "./pages/SearchResult/SearchResult";
+import Details from "./pages/details/Details";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search/:query" element={<SearchResult />} />
+        <Route path='/:mediaType/:id' element ={<Details/>} />
       </Routes>
     </BrowserRouter>
   );
