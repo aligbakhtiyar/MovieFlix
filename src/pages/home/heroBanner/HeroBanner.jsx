@@ -11,10 +11,10 @@ import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 
 const HeroBanner = () => {
   const [background, setBackground] = useState("");
-  const { query, setQuery } = useState("");
+  const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  const { url } = useSelector((state) => state.home);
-  const { data, loading } = useFetch("/movie/upcoming");
+  const {url} = useSelector((state) => state.home);
+  const {data, loading} = useFetch("/movie/upcoming");
 
   useEffect(() => {
     const bg =
@@ -23,22 +23,25 @@ const HeroBanner = () => {
     setBackground(bg);
   }, [data]);
 
+  // const searchQueryHandler = (event) => {
+  //   if (event.key === "Enter" && query.length > 0) {
+  //     navigate(`/search/${query}`);
+  //   }
+  // };
+
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
-      navigate(`/search/${query}`);
+        navigate(`/search/${query}`);
     }
-  };
+};
 
   return (
     <div className="heroBanner">
-      {!loading  &&<div className="backdrop-img">
+      {!loading  && (<div className="backdrop-img">
         <Img src={background} />
-      </div>}
+      </div>)}
 
-      <div className="opacity-layer">
-
-      </div>
-
+      <div className="opacity-layer"></div>
       <ContentWrapper>
       <div className="wrapper">
         <div className="heroBannerContent">
@@ -57,10 +60,9 @@ const HeroBanner = () => {
         </div>
       </div>
       </ContentWrapper>
-
-      
     </div>
   );
 };
 
 export default HeroBanner;
+
