@@ -7,7 +7,7 @@ const initialState = {
 export const homeSlice = createSlice({
   name: "home",
   initialState: {
-    url: {name: "ahmdad"},
+    url: {name: "ahmad"},
     genres: {},
   },
   reducers: {
