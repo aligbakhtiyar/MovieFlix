@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import SwitchTabs from "../../../components/swtichTabs/SwitchTabs";
 import Carousel from "../../../components/carousel/Carousel";
+import ContentWrapper from "../../../components/contentWrapper/contentWrapper";
 
 import useFetch from "../../../hooks/useFetch";
 
